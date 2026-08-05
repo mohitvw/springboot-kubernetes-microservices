@@ -15,13 +15,11 @@
 
     <groupId>com.ecommerce</groupId>
     <artifactId>build-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
+    <version>0.1.0-SNAPSHOT</version>
+    <name>Build Parent</name>
     <packaging>pom</packaging>
 
     <properties>
-
-        <java.version>17</java.version>
 
         <spring-cloud.version>2025.0.0</spring-cloud.version>
 
