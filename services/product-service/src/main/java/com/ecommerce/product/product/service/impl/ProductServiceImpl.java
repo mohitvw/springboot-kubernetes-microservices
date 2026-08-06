@@ -1,5 +1,7 @@
 package com.ecommerce.product.product.service.impl;
 
+import com.ecommerce.product.config.ApplicationProperties;
+import com.ecommerce.product.config.SpringApplicationProperties;
 import com.ecommerce.product.product.dto.PingResponse;
 import com.ecommerce.product.product.dto.ProductResponse;
 import com.ecommerce.product.product.service.ProductService;
@@ -11,9 +13,17 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    private final ApplicationProperties applicationProperties;
+    private final SpringApplicationProperties springApplicationProperties;
+
+    public ProductServiceImpl(ApplicationProperties applicationProperties, SpringApplicationProperties springApplicationProperties) {
+        this.applicationProperties = applicationProperties;
+        this.springApplicationProperties = springApplicationProperties;
+    }
+
     @Override
     public PingResponse ping() {
-        return new PingResponse("product-service", "UP")    ;
+        return new PingResponse(springApplicationProperties.name(), applicationProperties.status());
     }
 
     @Override
