@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+
+  postgres-db:
+    image: postgres:16
+    container_name: postgres-db
+
+    environment:
+      POSTGRES_DB: productdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+    networks:
+      - ecommerce-network
+
+  product-service:
+
+    build:
+      context: ..
+      dockerfile: services/product-service/Dockerfile
+
+    container_name: product-service
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      DB_URL: jdbc:postgresql://postgres-db:5432/productdb
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+
+    depends_on:
+      - postgres-db
+
+    networks:
+      - ecommerce-network
+
+volumes:
+  postgres-data:
+
+networks:
+  ecommerce-network:
