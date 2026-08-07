@@ -1,11 +1,11 @@
 package com.ecommerce.product.product.controller;
 
 import com.ecommerce.product.product.dto.PingResponse;
+import com.ecommerce.product.product.dto.ProductRequest;
 import com.ecommerce.product.product.dto.ProductResponse;
 import com.ecommerce.product.product.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -27,6 +27,18 @@ public class ProductController {
 
     @GetMapping
     public List<ProductResponse> getAllProducts() {
-        return productService.getAllProducts();
+        return productService.getProducts();
     }
+
+    @GetMapping("/{id}")
+    public ProductResponse getProductById(@PathVariable String id) {
+        return productService.getProduct(Long.valueOf(id));
+    }
+
+    @PostMapping
+    public ProductResponse create(@Valid @RequestBody ProductRequest request) {
+        return productService.create(request);
+    }
+
 }
+
