@@ -8,6 +8,12 @@ metadata:
 spec:
   replicas: 1
 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
   selector:
     matchLabels:
       app: product-service
@@ -20,7 +26,7 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: product-service:1.0
+          image: product-service:2.0
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
