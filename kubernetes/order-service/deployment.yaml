@@ -28,7 +28,7 @@ spec:
       containers:
         - name: order-service
 
-          image: order-service:1.0
+          image: order-service:2.0
           imagePullPolicy: Never
 
           ports:
@@ -79,3 +79,21 @@ spec:
                 configMapKeyRef:
                   name: order-service-config
                   key: SERVER_PORT
+
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-service-config
+                  key: DB_URL
+
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: product-service-secret
+                  key: DB_USERNAME
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: product-service-secret
+                  key: DB_PASSWORD
