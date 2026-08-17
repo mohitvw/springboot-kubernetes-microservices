@@ -15,10 +15,10 @@
   <modules>
 
     <module>build-parent</module>
-
     <module>services/product-service</module>
-
     <module>services/api-gateway</module>
+    <module>services/order-service</module>
+    <module>services/payment-service</module>
 
   </modules>
 
