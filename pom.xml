@@ -18,6 +18,8 @@
 
     <module>services/product-service</module>
 
+    <module>services/api-gateway</module>
+
   </modules>
 
 </project>
