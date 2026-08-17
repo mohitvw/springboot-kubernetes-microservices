@@ -1,5 +1,6 @@
 package com.ecommerce.order.service;
 
+import com.ecommerce.order.client.PaymentClient;
 import com.ecommerce.order.client.ProductClient;
 import com.ecommerce.order.dto.OrderRequest;
 import com.ecommerce.order.dto.OrderResponse;
@@ -12,13 +13,16 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final ProductClient productClient;
+    private final PaymentClient paymentClient;
 
     public OrderService(
             OrderRepository orderRepository,
-            ProductClient productClient) {
+            ProductClient productClient,
+            PaymentClient paymentClient) {
 
         this.orderRepository = orderRepository;
         this.productClient = productClient;
+        this.paymentClient = paymentClient;
     }
 
     public OrderResponse createOrder(OrderRequest request) {
@@ -27,6 +31,12 @@ public class OrderService {
             throw new IllegalArgumentException(
                     "Product not found: " + request.productId()
             );
+        }
+
+        boolean paymentSuccessful = paymentClient.processPayment();
+
+        if (!paymentSuccessful) {
+            throw new IllegalStateException("Payment failed");
         }
 
         Order order = new Order(
