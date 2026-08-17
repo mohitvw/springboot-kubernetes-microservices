@@ -11,7 +11,7 @@
         <groupId>com.ecommerce</groupId>
         <artifactId>build-parent</artifactId>
         <version>0.1.0-SNAPSHOT</version>
-        <relativePath>../build-parent/pom.xml</relativePath>
+        <relativePath>../../build-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>api-gateway</artifactId>
