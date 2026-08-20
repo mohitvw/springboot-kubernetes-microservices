@@ -90,11 +90,11 @@ spec:
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: product-service-secret
+                  name: order-service-secret
                   key: DB_USERNAME
 
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: product-service-secret
+                  name: order-service-secret
                   key: DB_PASSWORD
